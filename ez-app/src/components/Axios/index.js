@@ -6,11 +6,11 @@ const Axios = () => {
   const [count, setCount] = useState(0);
   const [user, setUser] = useState("");
   const [userImg, setUserImg] = useState("");
-  const [array, setArray] = useState([{}]).sort((a, b) => a.name > b.name);
+  const [array, setArray] = useState([{}]);
   const [obj, setobj] = useState({ name: user, picture: userImg });
 
   const fetchData = async () => {
-    axios
+    await axios
       .get("https://randomuser.me/api")
       .then((res) => {
         console.log(res.data.results[0].picture.thumbnail);
@@ -32,6 +32,17 @@ const Axios = () => {
         console.log(error);
       });
   };
+  //   const func = async () => {
+  //     const result = await axios
+  //       .get("https://randomuser.me/api")
+  //       .then((response) => {
+  //         return response;
+  //       });
+  //     console.log(result, "adsdasdasadsadsadsdasasddas");
+  //     return result;
+  //   };
+
+  //   func();
 
   const handleClick = () => {
     setCount(count + 1);
@@ -52,7 +63,7 @@ const Axios = () => {
       </div>
       {/* {!user && <div>no user</div>} */}
       <div className="userData">
-        {user} <img src={userImg} />
+        {user} <img src={userImg} alt="userImg" />
       </div>
       <div>
         {array
