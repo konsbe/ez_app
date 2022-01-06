@@ -6,7 +6,7 @@ const Axios = () => {
   const [count, setCount] = useState(0);
   const [user, setUser] = useState("");
   const [userImg, setUserImg] = useState("");
-  const [array, setArray] = useState([{}]);
+  const [array, setArray] = useState([{}]).sort((a, b) => a.name > b.name);
   const [obj, setobj] = useState({ name: user, picture: userImg });
 
   const fetchData = async () => {
@@ -40,10 +40,6 @@ const Axios = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  //   const handleFetchUser = async () => {
-
-  //     });
-  //   };
 
   return (
     <div>
@@ -59,13 +55,15 @@ const Axios = () => {
         {user} <img src={userImg} />
       </div>
       <div>
-        {array.map((person) => {
-          return (
-            <p>
-              {person.name} <img src={person.picture} />
-            </p>
-          );
-        })}
+        {array
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .map((person, index) => {
+            return (
+              <p key={index}>
+                {person.name} <img src={person.picture} />
+              </p>
+            );
+          })}
       </div>
     </div>
   );
